@@ -20,8 +20,8 @@ RUN dotnet publish "./FontTest1.csproj" -c $BUILD_CONFIGURATION -o /app/publish 
 
 FROM base AS final
 
-# WORKDIR /usr/share/fonts/truetype/ms
-# COPY --from=publish /app/publish/CertificateTemplates/Fonts .
+WORKDIR /usr/share/fonts/truetype/ms
+COPY --from=publish /app/publish/CertificateTemplates/Fonts .
 
 WORKDIR /app
 COPY --from=publish /app/publish .
