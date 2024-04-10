@@ -20,12 +20,6 @@ RUN dotnet publish "./FontTest1.csproj" -c $BUILD_CONFIGURATION -o /app/publish 
 
 FROM base AS final
 
-ENV DEBIAN_FRONTEND=noninteractive
-RUN sed -i 's/^Components: main$/& contrib/' /etc/apt/sources.list.d/debian.sources
-RUN apt-get update
-RUN apt-get install -y ttf-mscorefonts-installer fontconfig
-RUN fc-cache -f -v
-
 WORKDIR /usr/share/fonts/truetype/ms
 COPY --from=publish /app/publish/CertificateTemplates/Fonts .
 
