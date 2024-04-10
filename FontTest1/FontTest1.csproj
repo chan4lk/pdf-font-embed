@@ -13,13 +13,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="CertificateTemplates\Docs\template.docx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="CertificateTemplates\Fonts\ARIALUNI.TTF">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CertificateTemplates\Docs\" />
   </ItemGroup>
 
 
