@@ -45,7 +45,7 @@ namespace FontTest1.Controllers
         public Stream GeneratePDF()
         {
             var stream = System.IO.File.Open("CertificateTemplates/Docs/template.docx", FileMode.Open);
-            return GenerateCertificatePdf(stream, new Dictionary<string, object> { ["{{Title}}"] = "まはしく" });
+            return GenerateCertificatePdf(stream, new Dictionary<string, object> { ["{{Title}}"] = "まはしく", ["{{lang}}"] = "まはしく" });
         }
 
         private Stream GenerateCertificatePdf(Stream template, IDictionary<string, object> fieldValuePairs)
