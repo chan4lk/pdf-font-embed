@@ -19,6 +19,17 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./FontTest1.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
+RUN apt-get update \
+  && apt-get -y install --no-install-recommends \
+  ttf-mscorefonts-installer
+RUN fc-cache -fv
+
+WORKDIR /usr/share/fonts/truetype/ms
+COPY --from=publish /app/publish/CertificateTemplates/Fonts .
+
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "FontTest1.dll"]
